@@ -34,10 +34,8 @@ CREATE TABLE producto (
     precio_actual NUMERIC(10, 2) NOT NULL,
     stock INT NOT NULL,
     activo BOOLEAN NOT NULL DEFAULT TRUE, -- Marca de baja lógica (Regla R7)
-    id_categoria BIGINT NOT NULL,
+    id_categoria BIGINT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    CONSTRAINT fk_producto_categoria FOREIGN KEY (id_categoria) 
-        REFERENCES categoria(id_categoria) ON DELETE RESTRICT,
     -- Restricciones CHECK para evitar valores negativos (Regla R5)
     CONSTRAINT chk_producto_precio_no_negativo CHECK (precio_actual >= 0),
     CONSTRAINT chk_producto_stock_no_negativo CHECK (stock >= 0)
