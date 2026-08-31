@@ -11,3 +11,8 @@ ALTER TABLE producto
         FOREIGN KEY (id_categoria)
         REFERENCES categoria(id_categoria)
         ON DELETE RESTRICT;
+
+-- RN05: El correo electronico de cada cliente debe tener un formato valido basico.
+ALTER TABLE cliente
+    ADD CONSTRAINT chk_cliente_correo_formato
+        CHECK (correo_electronico ~ '^[^[:space:]@]+@[^[:space:]@]+\.[^[:space:]@]+$');
