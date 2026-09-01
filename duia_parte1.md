@@ -40,8 +40,23 @@ Se acepto el uso de `btrim` para que valores vacios o compuestos solamente por e
 Los comentarios `RN04` y `RN05` fueron reemplazados por comentarios descriptivos simples a pedido del alumno. Los comentarios actuales indican directamente la restriccion que se aplica.
 No se inventaron los prompts exactos de las dos primeras reglas porque no se conservaron. Esta ausencia queda registrada para mantener la declaracion fiel al proceso realizado.
 
-## Verificacion realizada
-Pendiente de ejecucion en la base de trabajo `foodstore_trabajo`. Todavia no se aplicaron las dos restricciones nuevas en PostgreSQL ni se realizaron los `INSERT` validos e invalidos requeridos por la consigna.
+## Verificación realizada
+Se realizaron las pruebas de inserción (válidas e inválidas) en la base de trabajo `foodstore_trabajo` obteniendo los siguientes resultados de error esperados en PostgreSQL:
+
+1. Prueba de producto con nombre vacío (rechazado por `chk_producto_nombre_no_vacio`):
+
+INSERT INTO producto (nombre, precio_actual, stock, id_categoria) VALUES ('   ', 150.00, 10, 1);
+ Salida: ERROR: el nuevo registro para la relación «producto» viola la restricción check «chk_producto_nombre_no_vacio»
+Prueba de cliente con correo inválido (rechazado por chk_cliente_correo_formato):
+
+
+INSERT INTO cliente (nombre, apellido, correo_electronico) VALUES ('Juan', 'Perez', 'juanperez.com');
+Salida: ERROR: el nuevo registro para la relación «cliente» viola la restricción check «chk_cliente_correo_formato»
+Inserción válida de cliente:
+
+
+INSERT INTO cliente (nombre, apellido, correo_electronico) VALUES ('Carlos', 'Gomez', 'carlos.gomez@example.com');
+Salida: INSERT 0 1 (Ejecución exitosa)
 
 Antes de completar esta seccion se debe:
 
